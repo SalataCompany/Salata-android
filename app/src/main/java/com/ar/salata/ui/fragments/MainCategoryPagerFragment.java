@@ -28,11 +28,12 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 
-public class PagerFragment extends Fragment {
+public class MainCategoryPagerFragment extends Fragment {
 
     private CategoryPagerAdapter adapter;
-    private ViewPager2 viewPager;
+    private ViewPager2 mainViewPager;
     protected ArrayList<Category> productCategories = new ArrayList<>();
+	protected ArrayList<Category> parentCats = new ArrayList<>();
     protected GoodsViewModel goodsViewModel;
 
     @Override
@@ -40,19 +41,6 @@ public class PagerFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         goodsViewModel = new ViewModelProvider(this).get(GoodsViewModel.class);
-        // end points to download categories
-/*
-		productCategories = new ArrayList<>();
-		productCategories.add(new Category(1, "خضروات"));
-		productCategories.add(new Category(2, "فاكهة"));
-		productCategories.add(new Category(3, "مكسرات"));
-		productCategories.add(new Category(4, "بقوليات"));
-*/
-        /*
-        if (getArguments() != null) {
-
-        }
-        */
 	}
 	
 	@Override
@@ -89,18 +77,13 @@ public class PagerFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		mainViewPager = view.findViewById(R.id.mainViewPager);
+		mainViewPager.setAdapter(adapter);
 		
-		viewPager = view.findViewById(R.id.pager);
-		viewPager.setAdapter(adapter);
-		
-		TabLayout productsTabs = view.findViewById(R.id.products_tabes);
-		
-		new TabLayoutMediator(productsTabs, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-			@Override
-			public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-				tab.setText(productCategories.get(position).getCategoryName());
-			}
-		}).attach();
+		TabLayout mainTabLayout = view.findViewById(R.id.mainTabLayout);
+
+		new TabLayoutMediator(mainTabLayout, mainViewPager, (tab, position) -> tab.setText(productCategories.get(position).getCategoryName())).attach();
 	}
 	
 	protected void setAdapter(CategoryPagerAdapter adapter) {

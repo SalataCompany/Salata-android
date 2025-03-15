@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -34,10 +35,15 @@ public class Category extends RealmObject implements Parcelable, Comparable<Cate
     private int priority;
     @SerializedName("level")
     private int level;
+    @SerializedName("subCats")
+    private RealmList<Category> subCats;
 
-    public Category(int categoryID, String categoryName) {
+    public Category(int categoryID, String categoryName, int priority, int level) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
+        this.priority = priority;
+        this.level = level;
+        this.subCats = new RealmList<>();
     }
 
     protected Category(Parcel in) {
@@ -94,6 +100,14 @@ public class Category extends RealmObject implements Parcelable, Comparable<Cate
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public RealmList<Category> getSubCats() {
+        return subCats;
+    }
+
+    public void setSubCats(RealmList<Category> subCats) {
+        this.subCats = subCats;
     }
 
     @Override

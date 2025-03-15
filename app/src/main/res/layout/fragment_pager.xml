@@ -58,7 +58,7 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/products_tabes"
+            android:id="@+id/mainTabLayout"
             style="@style/MyTabLayoutStyle"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/tab_layout_height"
@@ -68,10 +68,10 @@
             app:tabTextAppearance="@style/MyTabTextAppearance" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
+            android:id="@+id/mainViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/products_tabes"
+            android:layout_below="@+id/mainTabLayout"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="0dp"

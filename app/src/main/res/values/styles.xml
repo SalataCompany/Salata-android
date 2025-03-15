@@ -65,9 +65,28 @@
 
     <!-- for text -->
     <style name="MyTabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorLightFont</item>
         <item name="android:fontFamily">@font/calibrib</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="subCategoryTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabMinWidth">120dp</item> <!-- Smaller than parent -->
+        <item name="tabPadding">6dp</item>
+        <item name="tabTextAppearance">@style/MySubTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
+        <item name="tabIndicatorColor">@color/lightGrayTranslucent</item>
+        <item name="tabIndicator">@drawable/ic_tab_background</item>
+        <item name="tabIndicatorFullWidth">true</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="tabMode">auto</item>
+    </style>
+
+    <style name="MySubTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item> <!-- Smaller than parent category -->
+        <item name="android:textColor">@color/colorLightFont</item>
+        <item name="android:fontFamily">@font/calibrib</item> <!-- Use a different font -->
         <item name="textAllCaps">false</item>
     </style>
 
