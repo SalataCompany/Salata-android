@@ -27,4 +27,5 @@
     <string name="salata_unavailable_2">ستكون متاحة قريبا</string>
     <string name="to_delete_order_contact_call_center">لإلغاء الطلب الرجاء الاتصال بخدمة العملاء</string>
     <string name="payment_fail">فشلت عملية الدفع</string>
+    <string name="all">الكل</string>
 </resources>
