@@ -62,7 +62,7 @@ public class ProductsGalleryForCategoryFragment extends Fragment {
                 ArrayList<Category> newList = new ArrayList<>();
 
                 // create Category to show all products of the parent category
-                Category all = new Category(category.getCategoryID(), "الكل", 0, category.getLevel() +1);
+                Category all = new Category(category.getCategoryID(), getString(R.string.all), 0, category.getLevel() +1);
                 newList.add(all);
                 newList.addAll(category.getSubCats());
 
