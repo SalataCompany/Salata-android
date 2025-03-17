@@ -7,14 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ar.salata.R;
-import com.ar.salata.repositories.UserRepository;
 import com.ar.salata.repositories.model.Category;
 import com.ar.salata.repositories.model.Order;
 import com.ar.salata.repositories.model.OrderUnit;
@@ -29,12 +27,10 @@ import com.ar.salata.viewmodels.OrderViewModel;
 import com.ar.salata.viewmodels.UserViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddToCartFragment extends Fragment {
     private static final String PRODUCTS_CATEGORY = "category";
     private RecyclerView cartRecyclerView;
-    //private ArrayList<StockProduct> products = new ArrayList<>();
     private StockProductList productList = new StockProductList(new ArrayList<StockProduct>());
     private Category categoryOFProductsToBeDisplayed;
     private GoodsViewModel goodsViewModel;
@@ -123,61 +119,6 @@ public class AddToCartFragment extends Fragment {
             }
         });
 
-        /*
-        ///////// From here to down will be commented /////////////////
-        productsApiResponse = goodsViewModel.loadProducts(userViewModel.getToken(), orderViewModel.getOrderMutableLiveData().getValue().getAddressId());
-
-        productsApiResponse.observe(getViewLifecycleOwner(), new Observer<UserRepository.APIResponse>() {
-            @Override
-            public void onChanged(UserRepository.APIResponse response) {
-                switch (response) {
-                    case SUCCESS: {
-                        loadingDialogFragment.dismiss();
-                        goodsViewModel.getProducts(categoryOFProductsToBeDisplayed.getCategoryID(), orderViewModel.getOrderMutableLiveData().getValue().getAddressId()).observe(getViewLifecycleOwner(), new Observer<StockProductList>() {
-                            @Override
-                            public void onChanged(StockProductList productList) {
-                                if (getActivity() instanceof AddToCartActivity) {
-                                    for (StockProduct product : productList.getProductList()) {
-                                        if (product.getRemain() > 0)
-                                            products.add(product);
-                                    }
-                                } else if (getActivity() instanceof OrderEditActivity) {
-//                                    products.addAll(productList.getProductList());
-                                    Order order = orderViewModel.getOrderMutableLiveData().getValue();
-                                    ArrayList<Integer> ids = new ArrayList<>();
-                                    for (OrderUnit unit : order.getUnits()) {
-                                        ids.add(unit.getProductId());
-                                    }
-                                    for (StockProduct stockProduct : productList.getProductList()) {
-                                        if (stockProduct.getRemain() > 0 || ids.contains(stockProduct.getId())) {
-                                            products.add(stockProduct);
-                                        }
-                                    }
-                                }
-                                cartRecyclerAdapter.notifyDataSetChanged();
-                            }
-                        });
-                        break;
-                    }
-                    case ERROR: {
-                        loadingDialogFragment.dismiss();
-                        ErrorDialogFragment dialogFragment =
-                                new ErrorDialogFragment("حدث خطأ", "فشلت عملية تحميل بيانات المستخدم", false);
-                        dialogFragment.show(getActivity().getSupportFragmentManager(), null);
-                        break;
-                    }
-                    case FAILED: {
-                        loadingDialogFragment.dismiss();
-                        ErrorDialogFragment dialogFragment =
-                                new ErrorDialogFragment("حدث خطأ", getResources().getString(R.string.server_connection_error), false);
-                        dialogFragment.show(getActivity().getSupportFragmentManager(), null);
-                        break;
-                    }
-
-                }
-            }
-        });
-*/
         return view;
     }
 }
