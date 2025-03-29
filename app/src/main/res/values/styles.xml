@@ -32,7 +32,6 @@
         <item name="cornerRadius">64dp</item>
         <item name="rippleColor">@color/colorPrimaryDark</item>
         <item name="borderWidth">0dp</item>
-        <item name="fabSize">auto</item>
     </style>
 
     <style name="EFABBottomStyle" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">

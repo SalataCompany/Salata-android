@@ -3,10 +3,13 @@ package com.ar.salata.ui.fragments;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +33,9 @@ import com.google.android.material.navigation.NavigationView;
 
 import static android.app.Activity.RESULT_OK;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class HomeFragment extends Fragment {
     private static final int DIALOGREQUESTCODE = 1;
     public static final String USER_ID = "UserId";
@@ -38,10 +44,12 @@ public class HomeFragment extends Fragment {
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
     private NavigationView navigationView;
-    private boolean userLoggedIn = false;
+    private LinearLayout loggedInLinearLayout;
+    private LinearLayout loggedOutLinearLayout;
+
     private UserViewModel userViewModel;
     private AddressViewModel addressViewModel;
-
+    private Map<Integer, Boolean> fabStates = new HashMap<>();
 
     public static HomeFragment newInstance() {
 
@@ -71,9 +79,10 @@ public class HomeFragment extends Fragment {
         addressViewModel = new ViewModelProvider(this).get(AddressViewModel.class);
 
         View view = inflater.inflate(R.layout.fragment_home, container);
+        loggedInLinearLayout = view.findViewById(R.id.logged_in_ll);
+        loggedOutLinearLayout = view.findViewById(R.id.logged_out_ll);
 
         eFABWeigh = view.findViewById(R.id.efab_weigh);
-
         eFABWeigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +130,35 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        ExtendedFloatingActionButton myOrdersFab = view.findViewById(R.id.my_orders_fab);
+        ExtendedFloatingActionButton addAddressFab = view.findViewById(R.id.add_address_fab);
+        ExtendedFloatingActionButton signOutFab = view.findViewById(R.id.sign_out_fab);
+
+        ExtendedFloatingActionButton signUpFab = view.findViewById(R.id.sign_up_fab);
+        ExtendedFloatingActionButton loginFab = view.findViewById(R.id.login_fab);
+
+        // Initialize all buttons in shrunk state
+        myOrdersFab.shrink();
+        addAddressFab.shrink();
+        signOutFab.shrink();
+
+        signUpFab.shrink();
+        loginFab.shrink();
+
+        fabStates.put(myOrdersFab.getId(), false);
+        fabStates.put(addAddressFab.getId(), false);
+        fabStates.put(signOutFab.getId(), false);
+
+        fabStates.put(signUpFab.getId(), false);
+        fabStates.put(loginFab.getId(), false);
+
+        setupFabClick(myOrdersFab);
+        setupFabClick(addAddressFab);
+        setupFabClick(signOutFab);
+
+        setupFabClick(signUpFab);
+        setupFabClick(loginFab);
+
         toolbar = view.findViewById(R.id.toolbar_home);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
@@ -167,5 +205,43 @@ public class HomeFragment extends Fragment {
             eFABWeigh.show();
         else
             eFABWeigh.hide();
+    }
+
+    private void setupFabClick(ExtendedFloatingActionButton fab) {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isExpanded = fabStates.get(fab.getId());
+
+                if (isExpanded) {
+                    // Perform action when clicking the expanded button
+                    Toast.makeText(getContext(), fab.getText() + " Clicked!", Toast.LENGTH_SHORT).show();
+                }
+
+                // Toggle state
+                fabStates.put(fab.getId(), !isExpanded);
+
+                if (fabStates.get(fab.getId())) {
+                    fab.extend();  // Expand to show text
+                } else {
+                    fab.shrink();  // Shrink to show only icon
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        Log.i("Home Fragment onStart", "userViewModel.getUser(): ");
+        super.onResume();
+        if(userViewModel.getToken() == null){
+            Log.i("Home Fragment onResume", "userViewModel.getUser(): " + userViewModel.getUser());
+            loggedInLinearLayout.setVisibility(View.GONE);
+            loggedOutLinearLayout.setVisibility(View.VISIBLE);
+        }else{
+            Log.i("Home Fragment onResume", "userViewModel.getUser(): has token");
+            loggedInLinearLayout.setVisibility(View.VISIBLE);
+            loggedOutLinearLayout.setVisibility(View.GONE);
+        }
     }
 }

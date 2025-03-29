@@ -66,7 +66,7 @@
 
             <fragment
                 android:id="@+id/pager"
-                android:name="com.ar.salata.ui.fragments.ProductsGalleryPagerFragment"
+                android:name="com.ar.salata.ui.fragments.ProductsGalleryMainCategoryPagerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="0dp"
@@ -75,6 +75,82 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/logged_in_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/my_orders_fab"
+                        style="@style/EFABStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/nav_orders"
+                        app:icon="@drawable/ic_receipt"
+                        app:iconGravity="end" />
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/add_address_fab"
+                        style="@style/EFABStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/nav_add_address"
+                        app:icon="@drawable/ic_add_location"
+                        app:iconGravity="end" />
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/sign_out_fab"
+                        style="@style/EFABStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/nav_sign_out"
+                        app:icon="@drawable/ic_logout"
+                        app:iconGravity="end" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/logged_out_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/sign_up_fab"
+                        style="@style/EFABStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/nav_sign_up"
+                        app:icon="@drawable/ic_add_user_button"
+                        app:iconGravity="end" />
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/login_fab"
+                        style="@style/EFABStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/login_arabic"
+                        app:icon="@drawable/ic_login_scaled"
+                        app:iconGravity="end" />
+                </LinearLayout>
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
