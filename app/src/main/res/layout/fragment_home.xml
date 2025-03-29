@@ -99,7 +99,8 @@
                         android:layout_margin="8dp"
                         android:text="@string/nav_orders"
                         app:icon="@drawable/ic_receipt"
-                        app:iconGravity="end" />
+                        app:iconGravity="end"
+                        app:iconTint="@color/colorWhite" />
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/add_address_fab"
@@ -109,7 +110,8 @@
                         android:layout_margin="8dp"
                         android:text="@string/nav_add_address"
                         app:icon="@drawable/ic_add_location"
-                        app:iconGravity="end" />
+                        app:iconGravity="end"
+                        app:iconTint="@color/colorWhite" />
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/sign_out_fab"
@@ -119,7 +121,8 @@
                         android:layout_margin="8dp"
                         android:text="@string/nav_sign_out"
                         app:icon="@drawable/ic_logout"
-                        app:iconGravity="end" />
+                        app:iconGravity="end"
+                        app:iconTint="@color/colorWhite"/>
 
                 </LinearLayout>
 
@@ -137,7 +140,8 @@
                         android:layout_margin="8dp"
                         android:text="@string/nav_sign_up"
                         app:icon="@drawable/ic_add_user_button"
-                        app:iconGravity="end" />
+                        app:iconGravity="end"
+                        app:iconTint="@color/colorWhite"/>
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/login_fab"
@@ -147,7 +151,8 @@
                         android:layout_margin="8dp"
                         android:text="@string/login_arabic"
                         app:icon="@drawable/ic_login_scaled"
-                        app:iconGravity="end" />
+                        app:iconGravity="end"
+                        app:iconTint="@color/colorWhite"/>
                 </LinearLayout>
             </LinearLayout>
 
