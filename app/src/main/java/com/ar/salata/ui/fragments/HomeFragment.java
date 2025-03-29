@@ -166,7 +166,7 @@ public class HomeFragment extends Fragment {
         toolbar = view.findViewById(R.id.toolbar_home);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        setDrawer();
+        //setDrawer();
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
