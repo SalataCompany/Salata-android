@@ -9,13 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
@@ -25,7 +25,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ar.salata.R;
 import com.ar.salata.repositories.UserRepository;
 import com.ar.salata.repositories.model.User;
+import com.ar.salata.ui.activities.AddAddressActivity;
 import com.ar.salata.ui.activities.AddToCartActivity;
+import com.ar.salata.ui.activities.OrdersActivity;
+import com.ar.salata.ui.activities.SignInActivity;
+import com.ar.salata.ui.activities.SignUpActivity;
 import com.ar.salata.viewmodels.AddressViewModel;
 import com.ar.salata.viewmodels.UserViewModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -215,7 +219,7 @@ public class HomeFragment extends Fragment {
 
                 if (isExpanded) {
                     // Perform action when clicking the expanded button
-                    Toast.makeText(getContext(), fab.getText() + " Clicked!", Toast.LENGTH_SHORT).show();
+                    fabButtonsClicked(fab.getId());
                 }
 
                 // Toggle state
@@ -232,16 +236,61 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onResume() {
-        Log.i("Home Fragment onStart", "userViewModel.getUser(): ");
         super.onResume();
         if(userViewModel.getToken() == null){
-            Log.i("Home Fragment onResume", "userViewModel.getUser(): " + userViewModel.getUser());
             loggedInLinearLayout.setVisibility(View.GONE);
             loggedOutLinearLayout.setVisibility(View.VISIBLE);
         }else{
-            Log.i("Home Fragment onResume", "userViewModel.getUser(): has token");
             loggedInLinearLayout.setVisibility(View.VISIBLE);
             loggedOutLinearLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void fabButtonsClicked(int fabId){
+        Intent intent = null;
+
+        if (fabId == R.id.my_orders_fab) {
+            intent = new Intent(getContext(), OrdersActivity.class);
+        } else if (fabId == R.id.add_address_fab) {
+            intent = new Intent(getContext(), AddAddressActivity.class);
+        } else if (fabId == R.id.sign_up_fab) {
+            intent = new Intent(getContext(), SignUpActivity.class);
+        } else if (fabId == R.id.login_fab) {
+            intent = new Intent(getContext(), SignInActivity.class);
+        } else if (fabId == R.id.sign_out_fab) {
+            LoadingDialogFragment loadingDialogFragment = new LoadingDialogFragment();
+            loadingDialogFragment.show(getActivity().getSupportFragmentManager(), null);
+
+            MutableLiveData<UserRepository.APIResponse> response = userViewModel.signOut(userViewModel.getToken());
+            response.observe(this, new Observer<UserRepository.APIResponse>() {
+                @Override
+                public void onChanged(UserRepository.APIResponse apiResponse) {
+                    switch (apiResponse) {
+                        case SUCCESS:
+                            loadingDialogFragment.dismiss();
+                            getActivity().finish();
+                            startActivity(getActivity().getIntent());
+                            break;
+                        case FAILED: {
+                            loadingDialogFragment.dismiss();
+                            ErrorDialogFragment dialogFragment =
+                                    new ErrorDialogFragment("حدث خطأ", getResources().getString(R.string.server_connection_error), false);
+                            dialogFragment.show(getActivity().getSupportFragmentManager(), null);
+                            break;
+                        }
+                        case ERROR: {
+                            loadingDialogFragment.dismiss();
+                            userViewModel.clearUser();
+                            break;
+                        }
+                    }
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            });
+        }
+
+        if (intent != null) {
+            startActivity(intent);
         }
     }
 }
