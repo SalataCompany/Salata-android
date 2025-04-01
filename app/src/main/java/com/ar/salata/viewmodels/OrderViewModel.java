@@ -67,7 +67,7 @@ public class OrderViewModel extends ViewModel {
         return orderRepository.getPaymentMethods();
     }
 
-    public DeliveryFees deliveryFees(String addressId, String totalPrice){
+    public MutableLiveData<DeliveryFees> deliveryFees(String addressId, String totalPrice){
         return orderRepository.getDeliveryFees(addressId, totalPrice);
     }
 }

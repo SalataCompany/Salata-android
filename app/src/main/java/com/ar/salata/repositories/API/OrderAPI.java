@@ -37,6 +37,6 @@ public interface OrderAPI {
     @GET("/api/getPaymentMethods")
     Call<List<PaymentMethods>> getPaymentMethods();
 
-    @POST("api/DeliveryFees")
+    @POST("api/getDeliveryFees")
     Call<DeliveryFees> deliveryFees(@Query("address_id") String addressId, @Query("total_price") String totalPrice);
 }

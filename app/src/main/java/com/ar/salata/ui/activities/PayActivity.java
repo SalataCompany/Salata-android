@@ -47,6 +47,8 @@ public class PayActivity extends BaseActivity {
     private AppConfigViewModel appConfigViewModel;
     private MutableLiveData<UserRepository.APIResponse> submitOrderResponse;
     private TextInputLayout txInputNotes;
+    private FinalBillRecyclerAdapter adapter;
+
     Order order;
     APIToken token;
 
@@ -75,11 +77,18 @@ public class PayActivity extends BaseActivity {
 
         double addressId  = order.getAddressId();
         double totalPrice = order.getOrderPrice();
-        double fees = orderViewModel.deliveryFees(String.valueOf(addressId), String.valueOf(totalPrice)).getFees();
-        FinalBillRecyclerAdapter adapter = new FinalBillRecyclerAdapter(getApplicationContext(), order, fees, appConfigViewModel.getPhones());
+
+        adapter = new FinalBillRecyclerAdapter(getApplicationContext(), order, 0.0, appConfigViewModel.getPhones());
         adapter.setHasStableIds(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
+
+        orderViewModel.deliveryFees(String.valueOf(addressId), String.valueOf(totalPrice)).observe(this, response -> {
+            if(response!= null){
+                adapter.updateFees(response.getFees());
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         efab = findViewById(R.id.efab_confirm);
         efab.setOnClickListener(v -> {

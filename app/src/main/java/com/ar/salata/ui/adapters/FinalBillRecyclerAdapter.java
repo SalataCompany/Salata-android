@@ -79,10 +79,10 @@ public class FinalBillRecyclerAdapter extends RecyclerView.Adapter {
             case FOOTER_VIEW:
                 footerItemViewHolder = (FooterItemViewHolder) holder;
                 double orderPrice = round(order.getOrderPrice() * 100) / 100.0;
-                double fee = round(fees * 100) / 100.0;
+
                 footerItemViewHolder.billPrice.setText(ArabicString.toArabic("اجمالى المنتجات: " + orderPrice + " جنيه"));
-                footerItemViewHolder.fees.setText(ArabicString.toArabic("مصاريف الخدمة: " + fee + " جنيه"));
-                footerItemViewHolder.totalPrice.setText(ArabicString.toArabic("إجمالي الفاتورة: " +  (orderPrice + fee) + " جنيه"));
+                footerItemViewHolder.fees.setText(ArabicString.toArabic("مصاريف الخدمة: " + this.fees + " جنيه"));
+                footerItemViewHolder.totalPrice.setText(ArabicString.toArabic("إجمالي الفاتورة: " +  (orderPrice + this.fees) + " جنيه"));
                 break;
             case NORMAL_VIEW:
                 normalItemViewHolder = (NormalItemViewHolder) holder;
@@ -113,6 +113,10 @@ public class FinalBillRecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return data.size() + 2;
+    }
+
+    public void updateFees(double newFees) {
+        this.fees = round(newFees * 100) / 100.0;
     }
 
     class NormalItemViewHolder extends RecyclerView.ViewHolder {

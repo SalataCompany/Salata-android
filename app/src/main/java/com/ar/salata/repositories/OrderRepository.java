@@ -308,21 +308,21 @@ public class OrderRepository {
         return paymentMethods;
     }
 
-    public DeliveryFees getDeliveryFees(String addressId, String totalPrice){
-        DeliveryFees fees = new DeliveryFees();
+    public MutableLiveData<DeliveryFees> getDeliveryFees(String addressId, String totalPrice){
+        MutableLiveData<DeliveryFees> fees = new MutableLiveData<>();
 
         orderAPI.deliveryFees(addressId, totalPrice).enqueue(new Callback<DeliveryFees>() {
             @Override
             public void onResponse(Call<DeliveryFees> call, Response<DeliveryFees> response) {
                 if(response.body() != null){
-                    fees.setFees(response.body().getFees());
+                    fees.setValue(response.body());
                 }
 
             }
 
             @Override
             public void onFailure(Call<DeliveryFees> call, Throwable t) {
-                fees.setFees(0);
+                fees.setValue(new DeliveryFees());
             }
         });
 
