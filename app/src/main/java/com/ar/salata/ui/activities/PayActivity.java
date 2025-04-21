@@ -85,6 +85,7 @@ public class PayActivity extends BaseActivity {
 
         orderViewModel.deliveryFees(String.valueOf(addressId), String.valueOf(totalPrice)).observe(this, response -> {
             if(response!= null){
+                order.setDeliveryFees(response.getFees());
                 adapter.updateFees(response.getFees());
                 adapter.notifyDataSetChanged();
             }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,8 +33,6 @@ public class OrderDetailActivity extends BaseActivity {
     private FinalBillRecyclerAdapter adapter;
     private TextInputLayout txInputNotesOrderDetails;
 
-    private double totalPrice = 0;
-    private double addressId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +63,7 @@ public class OrderDetailActivity extends BaseActivity {
                 case SUCCESS: {
                     order = orderViewModel.getOrder(orderId);
 
-                    addressId  = order.getAddressId();
-                    totalPrice = order.getOrderPrice();
-                    double fees = orderViewModel.deliveryFees(String.valueOf(addressId), String.valueOf(totalPrice)).getFees();
-
-                    adapter = new FinalBillRecyclerAdapter(getApplicationContext(), order, fees, appConfigViewModel.getPhones());
+                    adapter = new FinalBillRecyclerAdapter(getApplicationContext(), order, order.getDeliveryFees(), appConfigViewModel.getPhones());
                     adapter.setHasStableIds(true);
                     recyclerView.setAdapter(adapter);
                     loadingDialogFragment.dismiss();

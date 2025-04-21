@@ -69,6 +69,16 @@ public class Order extends RealmObject implements Parcelable {
     private String reference;
     @SerializedName("auth_id")
     private String authId;
+    @SerializedName("delivery_fees")
+    private Double deliveryFees;
+
+    public Double getDeliveryFees() {
+        return deliveryFees;
+    }
+
+    public void setDeliveryFees(Double deliveryFees) {
+        this.deliveryFees = deliveryFees;
+    }
 
     public Order() {
     }

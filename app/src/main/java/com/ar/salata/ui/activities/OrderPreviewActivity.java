@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -94,10 +93,7 @@ public class OrderPreviewActivity extends BaseActivity {
                         paymentType.setText("طريقة الدفع: الدفع عند الاستــلام");
                     }
 
-                    double addressId  = order.getAddressId();
-                    double totalPrice = order.getOrderPrice();
-                    double fees = orderViewModel.deliveryFees(String.valueOf(addressId), String.valueOf(totalPrice)).getFees();
-                    adapter = new FinalBillRecyclerAdapter(getApplicationContext(), order, fees, appConfigViewModel.getPhones());
+                    adapter = new FinalBillRecyclerAdapter(getApplicationContext(), order, order.getDeliveryFees(), appConfigViewModel.getPhones());
 
                     adapter.setHasStableIds(true);
                     recyclerView.setAdapter(adapter);
