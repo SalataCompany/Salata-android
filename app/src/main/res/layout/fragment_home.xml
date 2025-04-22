@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/fragment_home_root_layout">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -20,6 +21,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:minHeight="64dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp">
@@ -75,7 +79,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -101,7 +108,10 @@
                         android:text="@string/nav_orders"
                         app:icon="@drawable/ic_receipt"
                         app:iconGravity="end"
-                        app:iconTint="@color/colorWhite" />
+                        app:iconTint="@color/colorWhite"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"/>
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/add_address_fab"
@@ -112,7 +122,10 @@
                         android:text="@string/nav_add_address"
                         app:icon="@drawable/ic_add_location"
                         app:iconGravity="end"
-                        app:iconTint="@color/colorWhite" />
+                        app:iconTint="@color/colorWhite"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"/>
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/sign_out_fab"
@@ -123,7 +136,10 @@
                         android:text="@string/nav_sign_out"
                         app:icon="@drawable/ic_logout"
                         app:iconGravity="end"
-                        app:iconTint="@color/colorWhite"/>
+                        app:iconTint="@color/colorWhite"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"/>
 
                 </LinearLayout>
 
@@ -142,7 +158,10 @@
                         android:text="@string/nav_sign_up"
                         app:icon="@drawable/ic_add_user_button"
                         app:iconGravity="end"
-                        app:iconTint="@color/colorWhite"/>
+                        app:iconTint="@color/colorWhite"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"/>
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/login_fab"
@@ -153,7 +172,10 @@
                         android:text="@string/login_arabic"
                         app:icon="@drawable/ic_login_scaled"
                         app:iconGravity="end"
-                        app:iconTint="@color/colorWhite"/>
+                        app:iconTint="@color/colorWhite"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -169,7 +191,10 @@
             android:layout_margin="16dp"
             android:drawableEnd="@drawable/ic_comparison"
             android:drawablePadding="8dp"
-            android:text="اوزنلى" />
+            android:text="اوزنلى"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

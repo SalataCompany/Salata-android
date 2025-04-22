@@ -6,16 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
@@ -137,7 +139,6 @@ public class HomeFragment extends Fragment {
         ExtendedFloatingActionButton myOrdersFab = view.findViewById(R.id.my_orders_fab);
         ExtendedFloatingActionButton addAddressFab = view.findViewById(R.id.add_address_fab);
         ExtendedFloatingActionButton signOutFab = view.findViewById(R.id.sign_out_fab);
-
         ExtendedFloatingActionButton signUpFab = view.findViewById(R.id.sign_up_fab);
         ExtendedFloatingActionButton loginFab = view.findViewById(R.id.login_fab);
 
@@ -162,6 +163,10 @@ public class HomeFragment extends Fragment {
 
         setupFabClick(signUpFab);
         setupFabClick(loginFab);
+
+        setupFabFocus(myOrdersFab);
+        setupFabFocus(addAddressFab);
+        setupFabFocus(signOutFab);
 
         toolbar = view.findViewById(R.id.toolbar_home);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -215,6 +220,8 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("onFocusChange", ": " + fab.toString());
+
                 boolean isExpanded = fabStates.get(fab.getId());
 
                 if (isExpanded) {
@@ -234,9 +241,50 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void setupFabFocus(ExtendedFloatingActionButton fab){
+        Log.d("onFocusChange", ": " + fab.toString());
+
+        fab.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.e("onFocusChange", ": " + hasFocus);
+                if(hasFocus){
+                    fabStates.put(fab.getId(), true);
+                    fab.extend();
+                }else{
+                    Log.d("onFocusChange", "te");
+                    fabStates.put(fab.getId(), false);
+                    fab.shrink();
+                }
+            }
+        });
+    }
+
+    private void shrinkAllFabs() {
+        Log.d("shrinkAllFabs", "test");
+        if (getView() == null) return;  // Safety check
+        // Get all FABs
+        int[] fabIds = {R.id.my_orders_fab, R.id.add_address_fab, R.id.sign_out_fab,
+                R.id.sign_up_fab, R.id.login_fab};
+
+        for (int id : fabIds) {
+            View fab = getView().findViewById(id);
+            if (fab instanceof ExtendedFloatingActionButton) {
+                fab.clearFocus();
+                fabStates.put(id, false);
+                ((ExtendedFloatingActionButton) fab).shrink();
+            }
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
+        if(userViewModel == null){
+            return;
+        }
+
         if(userViewModel.getToken() == null){
             loggedInLinearLayout.setVisibility(View.GONE);
             loggedOutLinearLayout.setVisibility(View.VISIBLE);
@@ -284,7 +332,6 @@ public class HomeFragment extends Fragment {
                             break;
                         }
                     }
-                    drawer.closeDrawer(GravityCompat.START);
                 }
             });
         }
