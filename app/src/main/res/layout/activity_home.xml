@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tag="fragment_home_tag" />
-
+<!--
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="300dp"
@@ -25,6 +25,6 @@
         app:menu="@menu/menu_nav_drawer">
 
     </com.google.android.material.navigation.NavigationView>
-
+-->
 </androidx.drawerlayout.widget.DrawerLayout>
 

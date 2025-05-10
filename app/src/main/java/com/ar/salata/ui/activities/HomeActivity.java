@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
 
-        setDrawer();
+        //setDrawer();
 
         fragmentManager = getSupportFragmentManager();
         homeFragment = HomeFragment.newInstance();
@@ -65,7 +65,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .commit();
 
     }
-
+/*
     private void setDrawer() {
         navigationView = findViewById(R.id.nav_view);
 
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
+*/
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

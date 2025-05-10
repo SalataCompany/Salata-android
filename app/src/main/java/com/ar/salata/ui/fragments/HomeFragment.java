@@ -160,7 +160,6 @@ public class HomeFragment extends Fragment {
         setupFabClick(myOrdersFab);
         setupFabClick(addAddressFab);
         setupFabClick(signOutFab);
-
         setupFabClick(signUpFab);
         setupFabClick(loginFab);
 
@@ -194,7 +193,7 @@ public class HomeFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
+/*
     private void setDrawer() {
         navigationView = getActivity().findViewById(R.id.nav_view);
 
@@ -207,7 +206,7 @@ public class HomeFragment extends Fragment {
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorAccent));
         toggle.syncState();
 
-    }
+    }*/
 
     public void setEFABVisibility(boolean isVisible) {
         if (isVisible)
