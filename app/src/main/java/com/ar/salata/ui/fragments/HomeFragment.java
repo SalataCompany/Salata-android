@@ -6,17 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -88,6 +85,14 @@ public class HomeFragment extends Fragment {
         loggedInLinearLayout = view.findViewById(R.id.logged_in_ll);
         loggedOutLinearLayout = view.findViewById(R.id.logged_out_ll);
 
+        View fabScrim = view.findViewById(R.id.fab_scrim);
+
+        // when the scrim is clicked, collapse everything
+        fabScrim.setOnClickListener(v -> {
+            shrinkAllFabs();
+            fabScrim.setVisibility(View.GONE);
+        });
+
         eFABWeigh = view.findViewById(R.id.efab_weigh);
         eFABWeigh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,26 +151,26 @@ public class HomeFragment extends Fragment {
         myOrdersFab.shrink();
         addAddressFab.shrink();
         signOutFab.shrink();
-
         signUpFab.shrink();
         loginFab.shrink();
 
         fabStates.put(myOrdersFab.getId(), false);
         fabStates.put(addAddressFab.getId(), false);
         fabStates.put(signOutFab.getId(), false);
-
         fabStates.put(signUpFab.getId(), false);
         fabStates.put(loginFab.getId(), false);
 
-        setupFabClick(myOrdersFab);
-        setupFabClick(addAddressFab);
-        setupFabClick(signOutFab);
-        setupFabClick(signUpFab);
-        setupFabClick(loginFab);
+        setupFabClickWithScrim(myOrdersFab, fabScrim);
+        setupFabClickWithScrim(addAddressFab, fabScrim);
+        setupFabClickWithScrim(signOutFab, fabScrim);
+        setupFabClickWithScrim(signUpFab, fabScrim);
+        setupFabClickWithScrim(loginFab, fabScrim);
 
         setupFabFocus(myOrdersFab);
         setupFabFocus(addAddressFab);
         setupFabFocus(signOutFab);
+        setupFabFocus(signUpFab);
+        setupFabFocus(loginFab);
 
         toolbar = view.findViewById(R.id.toolbar_home);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -215,27 +220,29 @@ public class HomeFragment extends Fragment {
             eFABWeigh.hide();
     }
 
-    private void setupFabClick(ExtendedFloatingActionButton fab) {
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("onFocusChange", ": " + fab.toString());
+    private void setupFabClickWithScrim(ExtendedFloatingActionButton fab, View scrim) {
+        fab.setOnClickListener(v -> {
+            Log.d("onFocusChange", ": " + fab.toString());
 
-                boolean isExpanded = fabStates.get(fab.getId());
+            boolean isExpanded = fabStates.get(fab.getId());
 
-                if (isExpanded) {
-                    // Perform action when clicking the expanded button
-                    fabButtonsClicked(fab.getId());
-                }
+            if (isExpanded) {
+                // Perform action when clicking the expanded button
+                fabButtonsClicked(fab.getId());
+            }
 
-                // Toggle state
-                fabStates.put(fab.getId(), !isExpanded);
+            // Toggle state
+            fabStates.put(fab.getId(), !isExpanded);
+            Log.d("HomeFragment", "fabStates.get(fab.getId(): " + fabStates.get(fab.getId()));
 
-                if (fabStates.get(fab.getId())) {
-                    fab.extend();  // Expand to show text
-                } else {
-                    fab.shrink();  // Shrink to show only icon
-                }
+            if (fabStates.get(fab.getId())) {
+                Log.d("HomeFragment", "fab expanded");
+                fab.extend();  // Expand to show text
+                // show the scrim so any outside tap will collapse
+                scrim.setVisibility(View.VISIBLE);
+            } else {
+                fab.shrink();  // Shrink to show only icon
+                scrim.setVisibility(View.GONE);
             }
         });
     }
