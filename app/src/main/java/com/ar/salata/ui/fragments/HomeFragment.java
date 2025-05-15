@@ -3,7 +3,6 @@ package com.ar.salata.ui.fragments;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,7 +88,6 @@ public class HomeFragment extends Fragment {
 
         // when the scrim is clicked, collapse everything
         fabScrim.setOnClickListener(v -> {
-            shrinkAllFabs();
             fabScrim.setVisibility(View.GONE);
         });
 
@@ -160,17 +158,17 @@ public class HomeFragment extends Fragment {
         fabStates.put(signUpFab.getId(), false);
         fabStates.put(loginFab.getId(), false);
 
-        setupFabClickWithScrim(myOrdersFab, fabScrim);
-        setupFabClickWithScrim(addAddressFab, fabScrim);
-        setupFabClickWithScrim(signOutFab, fabScrim);
-        setupFabClickWithScrim(signUpFab, fabScrim);
-        setupFabClickWithScrim(loginFab, fabScrim);
+        setupFabClick(myOrdersFab);
+        setupFabClick(addAddressFab);
+        setupFabClick(signOutFab);
+        setupFabClick(signUpFab);
+        setupFabClick(loginFab);
 
-        setupFabFocus(myOrdersFab);
-        setupFabFocus(addAddressFab);
-        setupFabFocus(signOutFab);
-        setupFabFocus(signUpFab);
-        setupFabFocus(loginFab);
+        setupFabFocus(myOrdersFab, fabScrim);
+        setupFabFocus(addAddressFab, fabScrim);
+        setupFabFocus(signOutFab, fabScrim);
+        setupFabFocus(signUpFab, fabScrim);
+        setupFabFocus(loginFab, fabScrim);
 
         toolbar = view.findViewById(R.id.toolbar_home);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -220,9 +218,8 @@ public class HomeFragment extends Fragment {
             eFABWeigh.hide();
     }
 
-    private void setupFabClickWithScrim(ExtendedFloatingActionButton fab, View scrim) {
+    private void setupFabClick(ExtendedFloatingActionButton fab) {
         fab.setOnClickListener(v -> {
-            Log.d("onFocusChange", ": " + fab.toString());
 
             boolean isExpanded = fabStates.get(fab.getId());
 
@@ -233,54 +230,32 @@ public class HomeFragment extends Fragment {
 
             // Toggle state
             fabStates.put(fab.getId(), !isExpanded);
-            Log.d("HomeFragment", "fabStates.get(fab.getId(): " + fabStates.get(fab.getId()));
 
             if (fabStates.get(fab.getId())) {
-                Log.d("HomeFragment", "fab expanded");
                 fab.extend();  // Expand to show text
                 // show the scrim so any outside tap will collapse
-                scrim.setVisibility(View.VISIBLE);
             } else {
                 fab.shrink();  // Shrink to show only icon
-                scrim.setVisibility(View.GONE);
             }
         });
     }
 
-    private void setupFabFocus(ExtendedFloatingActionButton fab){
-        Log.d("onFocusChange", ": " + fab.toString());
+    private void setupFabFocus(ExtendedFloatingActionButton fab, View scrim){
 
         fab.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Log.e("onFocusChange", ": " + hasFocus);
                 if(hasFocus){
                     fabStates.put(fab.getId(), true);
                     fab.extend();
+                    scrim.setVisibility(View.VISIBLE);
                 }else{
-                    Log.d("onFocusChange", "te");
                     fabStates.put(fab.getId(), false);
                     fab.shrink();
+                    scrim.setVisibility(View.GONE);
                 }
             }
         });
-    }
-
-    private void shrinkAllFabs() {
-        Log.d("shrinkAllFabs", "test");
-        if (getView() == null) return;  // Safety check
-        // Get all FABs
-        int[] fabIds = {R.id.my_orders_fab, R.id.add_address_fab, R.id.sign_out_fab,
-                R.id.sign_up_fab, R.id.login_fab};
-
-        for (int id : fabIds) {
-            View fab = getView().findViewById(id);
-            if (fab instanceof ExtendedFloatingActionButton) {
-                fab.clearFocus();
-                fabStates.put(id, false);
-                ((ExtendedFloatingActionButton) fab).shrink();
-            }
-        }
     }
 
     @Override
