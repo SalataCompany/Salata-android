@@ -10,14 +10,18 @@
         style="@style/subCategoryTabLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginHorizontal="20dp"
-        app:tabTextAppearance="@style/MySubTabTextAppearance"
-        />
+        android:visibility="gone"
+        app:tabTextAppearance="@style/MySubTabTextAppearance" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/add_to_cart_sub_view_pager"
+    <com.ar.salata.ui.utils.NestedScrollableHost
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/add_to_cart_sub_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.ar.salata.ui.utils.NestedScrollableHost>
 
 </LinearLayout>
