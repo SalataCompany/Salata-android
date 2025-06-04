@@ -18,7 +18,7 @@
             android:layout_width="400dp"
             android:layout_height="281dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/salatafinalprint_2">
+            app:srcCompat="@drawable/salata_logo_with_slogan">
 
         </ImageView>
 
