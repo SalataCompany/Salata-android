@@ -202,7 +202,7 @@
             android:layout_margin="16dp"
             android:drawableEnd="@drawable/ic_comparison"
             android:drawablePadding="8dp"
-            android:text="اوزنلى"/>
+            android:text="@string/order"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

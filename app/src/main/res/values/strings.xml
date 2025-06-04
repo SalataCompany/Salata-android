@@ -28,4 +28,5 @@
     <string name="to_delete_order_contact_call_center">لإلغاء الطلب الرجاء الاتصال بخدمة العملاء</string>
     <string name="payment_fail">فشلت عملية الدفع</string>
     <string name="all">الكل</string>
+    <string name="order">اطلب</string>
 </resources>
