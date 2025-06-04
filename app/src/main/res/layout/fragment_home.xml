@@ -202,10 +202,7 @@
             android:layout_margin="16dp"
             android:drawableEnd="@drawable/ic_comparison"
             android:drawablePadding="8dp"
-            android:text="اوزنلى"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:clickable="true" />
+            android:text="اوزنلى"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
