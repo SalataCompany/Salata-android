@@ -32,10 +32,10 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DrawerLayout drawer;
-    private ActionBarDrawerToggle toggle;
+    //private DrawerLayout drawer;
+    //private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-    private NavigationView navigationView;
+    //private NavigationView navigationView;
     private FragmentManager fragmentManager;
     private HomeFragment homeFragment;
     private UserViewModel userViewModel;
@@ -114,14 +114,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        toggle.onConfigurationChanged(newConfig);
+        //toggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
+        /*if (toggle.onOptionsItemSelected(item)) {
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -130,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.nav_main:
-                drawer.closeDrawer(GravityCompat.START);
+                //drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_orders:
                 intent = new Intent(HomeActivity.this, OrdersActivity.class);
@@ -197,7 +197,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (intent != null) {
             startActivity(intent);
         }
-        navigationView.setCheckedItem(item);
+        //navigationView.setCheckedItem(item);
         return true;
     }
 
@@ -228,29 +228,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         break;
                     }
                 }
-                drawer.closeDrawer(GravityCompat.START);
+                //drawer.closeDrawer(GravityCompat.START);
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        /*if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (drawer != null) {
-            navigationView.setCheckedItem(R.id.nav_main);
-            drawer.closeDrawer(GravityCompat.START);
+        //if (drawer != null) {
+            //navigationView.setCheckedItem(R.id.nav_main);
+            //drawer.closeDrawer(GravityCompat.START);
 
             if (userViewModel.getUser() == null && userViewModel.getToken() == null) {
-                showLoginHeader();
+                //showLoginHeader();
             } else if ((userViewModel.getToken() != null) /*||
                     !(userViewModel.getUser().getToken()).equals(userViewModel.getToken().toString())*/) {
 
@@ -269,7 +269,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                         new ErrorDialogFragment("حدث خطأ", "فشلت عملية تحميل بيانات المستخدم", false);
                                 dialogFragment.show(getSupportFragmentManager(), null);
                                 userViewModel.clearUser();
-                                showLoginHeader();
+                                //showLoginHeader();
                                 break;
                             }
                             case FAILED: {
@@ -281,28 +281,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             }
                             case SUCCESS:
                                 loadingDialogFragment.dismiss();
-                                showProfileHeader();
+                                //showProfileHeader();
                                 // TODO: 5/21/2020 end loading dialog
                                 break;
                         }
                     }
                 });
             } else {
-                showProfileHeader();
+                //showProfileHeader();
             }
-        }
+        //}
     }
 
-    private void showLoginHeader() {
+    /*private void showLoginHeader() {
         navigationView.getMenu().findItem(R.id.nav_sign_out).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_orders).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_settings).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_address).setVisible(false);
         navigationView.getHeaderView(0).findViewById(R.id.btn_sign_in).setVisibility(View.VISIBLE);
         navigationView.getHeaderView(0).findViewById(R.id.nav_profile).setVisibility(View.GONE);
-    }
+    }*/
 
-    private void showProfileHeader() {
+    /*private void showProfileHeader() {
         User user = userViewModel.getUser();
         navigationView.getHeaderView(0).findViewById(R.id.btn_sign_in).setVisibility(View.GONE);
         View view = navigationView.getHeaderView(0).findViewById(R.id.nav_profile);
@@ -313,7 +313,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().findItem(R.id.nav_orders).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_settings).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_address).setVisible(true);
-    }
+    }*/
 
     public void setEFABVisibility(boolean isVisible) {
         homeFragment.setEFABVisibility(isVisible);
