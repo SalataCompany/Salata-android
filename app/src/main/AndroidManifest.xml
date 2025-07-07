@@ -51,7 +51,8 @@
             android:name=".ui.activities.SplashActivity"
             android:configChanges="orientation"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,7 +63,8 @@
             android:name=".ui.activities.HomeActivity"
             android:configChanges="orientation"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
