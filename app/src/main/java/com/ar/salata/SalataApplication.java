@@ -6,8 +6,8 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class SalataApplication extends Application {
-//	public final static String BASEURL = "http://www.salatamasr.com/";
-	public final static String BASEURL = "http://staging.salatamasr.com/";
+	public final static String BASEURL = "https://www.salatamasr.shop/";
+//	public final static String BASEURL = "https://staging.salatamasr.shop/";
 
 	@Override
 	public void onCreate() {
