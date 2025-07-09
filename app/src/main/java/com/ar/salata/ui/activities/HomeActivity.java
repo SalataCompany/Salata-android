@@ -128,71 +128,60 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = null;
-        switch (item.getItemId()) {
-            case R.id.nav_main:
-                //drawer.closeDrawer(GravityCompat.START);
-                break;
-            case R.id.nav_orders:
-                intent = new Intent(HomeActivity.this, OrdersActivity.class);
-                break;
-            case R.id.nav_settings:
-                intent = new Intent(HomeActivity.this, UserProfileActivity.class);
-                break;
-            case R.id.nav_address:
-                intent = new Intent(HomeActivity.this, AddAddressActivity.class);
-                break;
-            case R.id.nav_sign_up:
-                intent = new Intent(HomeActivity.this, SignUpActivity.class);
-                break;
-            case R.id.nav_about:
-                intent = new Intent(HomeActivity.this, AboutActivity.class);
-                break;
-            case R.id.nav_contact:
-                intent = new Intent(HomeActivity.this, ContactUsActivity.class);
-                break;
-            case R.id.nav_facebook:
-                try {
-//                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://www.facebook.com/TechnologyBrotherhood"));
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getFacebook()[0]));
-                    startActivity(intent);
-                } catch (Exception exception) {
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getFacebook()[1]));
-                    startActivity(intent);
-                }
-                intent = null;
-                break;
-            case R.id.nav_twitter:
-                try {
-//                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=EtisalatMisr"));
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getTwitter()[0]));
-                    startActivity(intent);
-                } catch (Exception exception) {
-//                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/EtisalatMisr"));
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getTwitter()[1]));
-                    startActivity(intent);
-                }
-                intent = null;
-                break;
-            case R.id.nav_instagram:
-                try {
-//                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/etisalatmisr"));
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getInstagram()[0]));
-                    startActivity(intent);
-                } catch (Exception exception) {
-//                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.instagram.com/etisalatmisr"));
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getInstagram()[1]));
-                    startActivity(intent);
-                }
-                intent = null;
-                break;
-            case R.id.btn_sign_in:
-                intent = new Intent(HomeActivity.this, SignInActivity.class);
-                break;
-            case R.id.nav_sign_out:
-                signOut();
-                break;
-            default:
-                // TODO: 3/30/2020
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.nav_main) {
+            //drawer.closeDrawer(GravityCompat.START);
+        } else if (itemId == R.id.nav_orders) {
+            intent = new Intent(HomeActivity.this, OrdersActivity.class);
+        } else if (itemId == R.id.nav_settings) {
+            intent = new Intent(HomeActivity.this, UserProfileActivity.class);
+        } else if (itemId == R.id.nav_address) {
+            intent = new Intent(HomeActivity.this, AddAddressActivity.class);
+        } else if (itemId == R.id.nav_sign_up) {
+            intent = new Intent(HomeActivity.this, SignUpActivity.class);
+        } else if (itemId == R.id.nav_about) {
+            intent = new Intent(HomeActivity.this, AboutActivity.class);
+        } else if (itemId == R.id.nav_contact) {
+            intent = new Intent(HomeActivity.this, ContactUsActivity.class);
+        } else if (itemId == R.id.nav_facebook) {
+            try {
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://www.facebook.com/TechnologyBrotherhood"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getFacebook()[0]));
+                startActivity(intent);
+            } catch (Exception exception) {
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getFacebook()[1]));
+                startActivity(intent);
+            }
+            intent = null;
+        } else if (itemId == R.id.nav_twitter) {
+            try {
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=EtisalatMisr"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getTwitter()[0]));
+                startActivity(intent);
+            } catch (Exception exception) {
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/EtisalatMisr"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getTwitter()[1]));
+                startActivity(intent);
+            }
+            intent = null;
+        } else if (itemId == R.id.nav_instagram) {
+            try {
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/etisalatmisr"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getInstagram()[0]));
+                startActivity(intent);
+            } catch (Exception exception) {
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.instagram.com/etisalatmisr"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(appConfigViewModel.getInstagram()[1]));
+                startActivity(intent);
+            }
+            intent = null;
+        } else if (itemId == R.id.btn_sign_in) {
+            intent = new Intent(HomeActivity.this, SignInActivity.class);
+        } else if (itemId == R.id.nav_sign_out) {
+            signOut();
+        } else {
+            // TODO: 3/30/2020
         }
         if (intent != null) {
             startActivity(intent);
