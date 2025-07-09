@@ -16,6 +16,7 @@ public class SalataApplication extends Application {
 		Realm.init(this);
 		RealmConfiguration defaultConfiguration = new RealmConfiguration.Builder()
 				.deleteRealmIfMigrationNeeded()
+				.allowWritesOnUiThread(true)
 				.name("SalataDB.realm")
 				.build();
 		Realm.setDefaultConfiguration(defaultConfiguration);

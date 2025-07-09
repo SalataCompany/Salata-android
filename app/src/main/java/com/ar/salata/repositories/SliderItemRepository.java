@@ -43,7 +43,7 @@ public class SliderItemRepository {
             public void onResponse(Call<SliderItemList> call, Response<SliderItemList> response) {
                 if (response.isSuccessful()) {
                     Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
+                    realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
                             realm.where(SliderItem.class).findAll().deleteAllFromRealm();

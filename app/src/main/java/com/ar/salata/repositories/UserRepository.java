@@ -57,7 +57,7 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     User user = response.body();
                     Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
+                    realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
                             realm.where(User.class).findAll().deleteAllFromRealm();
@@ -111,7 +111,7 @@ public class UserRepository {
 
     public void clearUserDate() {
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 realm.where(User.class).findAll().deleteAllFromRealm();

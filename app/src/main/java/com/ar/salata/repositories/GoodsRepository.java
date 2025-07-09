@@ -60,7 +60,7 @@ public class GoodsRepository {
             public void onResponse(Call<CategoryList> call, Response<CategoryList> response) {
                 if (response.isSuccessful()) {
                     Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
+                    realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
                             realm.where(Category.class).findAll().deleteAllFromRealm();
@@ -106,7 +106,7 @@ public class GoodsRepository {
                 if (response.isSuccessful()) {
 //                    Log.e("test1",response.body().getProductList().toString());
                     Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
+                    realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
                             realm.where(StockProduct.class).findAll().deleteAllFromRealm();
@@ -155,7 +155,7 @@ public class GoodsRepository {
             public void onResponse(Call<ProductList> call, Response<ProductList> response) {
                 if (response.isSuccessful()) {
                     Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
+                    realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
                             realm.where(Product.class).findAll().deleteAllFromRealm();
