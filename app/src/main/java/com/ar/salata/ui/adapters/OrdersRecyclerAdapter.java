@@ -84,7 +84,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter {
         viewHolderUpcoming.orderId.setText(ArabicString.toArabic(String.valueOf(orders.get(position).getOrderId())));
         viewHolderUpcoming.orderDateDay.setText(ArabicString.toArabic(orders.get(position).getOrderDateDay()));
         viewHolderUpcoming.orderDateHour.setText(ArabicString.toArabic(shift.getFrom() + " ~ " + shift.getTo()));
-        viewHolderUpcoming.orderPrice.setText(ArabicString.toArabic(String.valueOf(round(orders.get(position).getOrderPrice() * 100) / 100.0)));
+        viewHolderUpcoming.orderPrice.setText(ArabicString.toArabic(String.valueOf(round((orders.get(position).getOrderPrice() + orders.get(position).getDeliveryFees()) * 100) / 100.0)));
 
 //        viewHolderUpcoming.orderImage.setImageResource(orders.get(position).getOrderImage());
         Glide.with(holder.itemView)

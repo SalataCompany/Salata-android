@@ -63,7 +63,7 @@
                 android:layout_marginVertical="12dp"
                 android:fontFamily="@font/calibri"
                 android:includeFontPadding="false"
-                android:text="إجمالى الحساب         :"
+                android:text="إجمالى الفاتورة         :"
                 android:textColor="@color/colorFont"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
