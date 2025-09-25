@@ -35,14 +35,17 @@ public class Category extends RealmObject implements Parcelable, Comparable<Cate
     private int priority;
     @SerializedName("level")
     private int level;
+    @SerializedName("has_products")
+    private int hasProducts;
     @SerializedName("subCats")
     private RealmList<Category> subCats;
 
-    public Category(int categoryID, String categoryName, int priority, int level) {
+    public Category(int categoryID, String categoryName, int priority, int level, int hasProducts) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.priority = priority;
         this.level = level;
+        this.hasProducts = hasProducts;
         this.subCats = new RealmList<>();
     }
 
@@ -124,5 +127,9 @@ public class Category extends RealmObject implements Parcelable, Comparable<Cate
     @Override
     public int compareTo(Category cat) {
         return Integer.compare(this.priority, cat.priority);
+    }
+
+    public int getHasProducts() {
+        return hasProducts;
     }
 }
